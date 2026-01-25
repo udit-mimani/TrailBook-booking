@@ -1,3 +1,4 @@
+using GoTyolo.Api;
 using GoTyolo.Api.BackgroundServices;
 using GoTyolo.Api.Services;
 using GoTyolo.Infrastructure.Data;
@@ -30,6 +31,7 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     await db.Database.MigrateAsync();
+    await SeedData.SeedAsync(db);
 }
 
 // Configure the HTTP request pipeline.
