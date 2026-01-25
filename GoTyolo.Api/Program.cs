@@ -1,3 +1,4 @@
+using GoTyolo.Api.BackgroundServices;
 using GoTyolo.Api.Services;
 using GoTyolo.Infrastructure.Data;
 using GoTyolo.Infrastructure.Repositories;
@@ -17,13 +18,14 @@ builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 
+builder.Services.AddHostedService<BookingExpiryService>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Auto-migrate on startup
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
