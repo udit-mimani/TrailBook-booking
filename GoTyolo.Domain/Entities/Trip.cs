@@ -14,4 +14,27 @@ public class Trip
     public RefundPolicy RefundPolicy { get; set; } = new();
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+
+    public bool CanBook(int numSeats)
+    {
+        return Status == TripStatus.Published && AvailableSeats >= numSeats;
+    }
+
+    public void ReserveSeats(int numSeats)
+    {
+        if (!CanBook(numSeats))
+            throw new InvalidOperationException("Cannot reserve seats");
+
+        AvailableSeats -= numSeats;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    public void ReleaseSeats(int numSeats)
+    {
+        AvailableSeats += numSeats;
+        if (AvailableSeats > MaxCapacity)
+            AvailableSeats = MaxCapacity;
+
+        UpdatedAt = DateTime.UtcNow;
+    }
 }
