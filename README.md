@@ -35,11 +35,48 @@ GoTyolo-booking/
 ## 🔧 Getting Started
 ### Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- Docker & Docker Compose
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (for local development)
 - [PostgreSQL 16](https://www.postgresql.org/download/) (Installed locally)
 - [pgAdmin](https://www.pgadmin.org/download/) (Optional - for database management)
 
-### Database Setup
+### Run with Docker
+```bash
+# Clone repository
+git clone https://github.com/udit-mimani/GoTyolo-booking.git
+cd GoTyolo-booking
+
+# Start all services
+docker-compose up -d
+
+# Check logs
+docker-compose logs -f api
+
+# Access API
+curl http://localhost:5000/api/trips
+```
+
+For Podman
+```bash
+# Initialize the Machine
+podman machine init   # Run only the first time
+podman machine start  # Run every time you want to use Podman
+
+# Navigate to the project and start all services
+podman compose up --build
+
+# Common commands:
+## Check Containers:
+podman ps
+## Check logs:
+podman logs gotyolo-api
+```
+
+The API will be available at `http://localhost:5000` with Swagger UI at `http://localhost:5000/swagger`.
+
+### Run Locally
+
+#### Database Setup
 
 - Connect to PostgreSQL using pgAdmin
 - Create database and user
@@ -47,7 +84,7 @@ CREATE DATABASE gotyolo_db;
 CREATE USER gotyolo_user WITH PASSWORD 'gotyolo_password';
 GRANT ALL PRIVILEGES ON DATABASE gotyolo_db TO gotyolo_user;
 
-### Application Setup
+#### Application Setup
 ```bash
 # Clone the repository
 git clone https://github.com/udit-mimani/GoTyolo-booking.git
