@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: gotyolo-db
+    environment:
+      POSTGRES_DB: gotyolo
+      POSTGRES_USER: gotyolo_user
+      POSTGRES_PASSWORD: gotyolo_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gotyolo_user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gotyolo-api
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=gotyolo;Username=gotyolo_user;Password=gotyolo_pass
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

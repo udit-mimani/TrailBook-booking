@@ -47,6 +47,9 @@ artifacts/
 .env
 appsettings.Development.json
 
+# Docker
+.dockerignore
+
 # OS files
 .DS_Store
 Thumbs.db
