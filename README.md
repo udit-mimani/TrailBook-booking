@@ -1,4 +1,4 @@
-# GoTyolo - Travel Booking Platform
+# TrailBook - Travel Booking Platform
 
 A backend API for managing travel bookings with payment processing, refund policies, and admin visibility.
 
@@ -20,11 +20,11 @@ A backend API for managing travel bookings with payment processing, refund polic
 
 ### Project Structure
 ```
-GoTyolo-booking/
-├── GoTyolo.Api/              # REST API layer with controllers
-├── GoTyolo.Domain/           # Domain models and business logic
-├── GoTyolo.Infrastructure/   # Data access and repositories
-└── GoTyolo.Tests/            # Unit and integration tests (tests will be added in future)
+TrailBook-booking/
+├── TrailBook.Api/              # REST API layer with controllers
+├── TrailBook.Domain/           # Domain models and business logic
+├── TrailBook.Infrastructure/   # Data access and repositories
+└── TrailBook.Tests/            # Unit and integration tests (tests will be added in future)
 ```
 
 ### Design Patterns
@@ -43,8 +43,8 @@ GoTyolo-booking/
 ### Run with Docker
 ```bash
 # Clone repository
-git clone https://github.com/udit-mimani/GoTyolo-booking.git
-cd GoTyolo-booking
+git clone https://github.com/udit-mimani/TrailBook-booking.git
+cd TrailBook-booking
 
 # Start all services
 docker-compose up -d
@@ -69,7 +69,7 @@ podman compose up --build
 ## Check Containers:
 podman ps
 ## Check logs:
-podman logs gotyolo-api
+podman logs trailbook-api
 ```
 
 The API will be available at `http://localhost:5000` with Swagger UI at `http://localhost:5000/swagger`.
@@ -80,27 +80,27 @@ The API will be available at `http://localhost:5000` with Swagger UI at `http://
 
 - Connect to PostgreSQL using pgAdmin
 - Create database and user
-CREATE DATABASE gotyolo_db;
-CREATE USER gotyolo_user WITH PASSWORD 'gotyolo_password';
-GRANT ALL PRIVILEGES ON DATABASE gotyolo_db TO gotyolo_user;
+CREATE DATABASE trailbook_db;
+CREATE USER trailbook_user WITH PASSWORD 'trailbook_password';
+GRANT ALL PRIVILEGES ON DATABASE trailbook_db TO trailbook_user;
 
 #### Application Setup
 ```bash
 # Clone the repository
-git clone https://github.com/udit-mimani/GoTyolo-booking.git
-cd GoTyolo-booking
+git clone https://github.com/udit-mimani/TrailBook-booking.git
+cd TrailBook-booking
 
 # Restore dependencies
 dotnet restore
 
 # Update database connection string in appsettings.json if needed
-# Default: Host=localhost;Port=5432;Database=gotyolo_db;Username=gotyolo_user;Password=gotyolo_password
+# Default: Host=localhost;Port=5432;Database=trailbook_db;Username=trailbook_user;Password=trailbook_password
 
 # Apply database migrations
-dotnet ef database update --project GoTyolo.Infrastructure --startup-project GoTyolo.Api
+dotnet ef database update --project TrailBook.Infrastructure --startup-project TrailBook.Api
 
 # Run the application
-dotnet run --project GoTyolo.Api
+dotnet run --project TrailBook.Api
 
 # Access Swagger UI for API documentation:
 ```

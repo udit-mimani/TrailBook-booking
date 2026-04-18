@@ -3,17 +3,17 @@ version: '3.8'
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: gotyolo-db
+    container_name: trailbook-db
     environment:
-      POSTGRES_DB: gotyolo
-      POSTGRES_USER: gotyolo_user
-      POSTGRES_PASSWORD: gotyolo_pass
+      POSTGRES_DB: trailbook
+      POSTGRES_USER: trailbook_user
+      POSTGRES_PASSWORD: trailbook_pass
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U gotyolo_user"]
+      test: ["CMD-SHELL", "pg_isready -U trailbook_user"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -22,12 +22,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: gotyolo-api
+    container_name: trailbook-api
     ports:
       - "5000:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Host=postgres;Database=gotyolo;Username=gotyolo_user;Password=gotyolo_pass
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=trailbook;Username=trailbook_user;Password=trailbook_pass
     depends_on:
       postgres:
         condition: service_healthy

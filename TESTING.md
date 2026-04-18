@@ -1,4 +1,4 @@
-# GoTyolo API Testing Documentation
+# TrailBook API Testing Documentation
 
 ## Test Scenarios
 
